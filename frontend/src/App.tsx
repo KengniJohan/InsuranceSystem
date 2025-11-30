@@ -1,14 +1,21 @@
+import { RouterProvider } from 'react-router-dom'
 import './App.css'
-import AccordsDevis from './page/AccordsDevis'
+import { router } from './core/routes'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 
 function App() {
 
+  const client = new QueryClient();
+
   return (
-    <div>
-      <AccordsDevis/>
-    </div>
+    <QueryClientProvider client={client}>
+      <RouterProvider router={router}/>
+    </QueryClientProvider>
   )
 }
 
 export default App
+  // <div>
+    //   <AccordsDevis/>
+    // </div>
