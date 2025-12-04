@@ -31,6 +31,8 @@ const RepairModal = ({ quote, isOpen, onClose, onPreview }) => {
     }, 300);
   };
 
+  console.log("Repairs du back:", quote.repairs);
+
   return (
     <>
       <div
@@ -102,7 +104,7 @@ const RepairModal = ({ quote, isOpen, onClose, onPreview }) => {
             <div className="space-y-2 mb-4">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Montant total du devis</span>
-                <span className="font-semibold text-gray-900">{formatFCFA(totalSelected)}</span>
+                <span className="font-semibold text-gray-900">{formatFCFA(quote.amount)}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-blue-600 font-medium">Montant sélectionné</span>

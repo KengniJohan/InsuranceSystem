@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 public class Client {
@@ -17,9 +19,11 @@ public class Client {
     private Personne personne;
 
     @OneToMany(mappedBy = "client")
+	@JsonIgnore
     private List<Vehicule> vehicules;
 
     @OneToMany(mappedBy = "assure")
+	@JsonIgnore
     private List<Sinistre> sinistres;
 
 	public Long getIDclient() {

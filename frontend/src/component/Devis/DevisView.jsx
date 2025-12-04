@@ -5,8 +5,11 @@ import QuoteCard from './QuoteCards';
 import RepairModal from './RepairModal';
 import PreviewModal from './PreviewModal';
 import QuoteDetailsModal from './QuoteDetailsModal';
+import { FileText } from 'lucide-react';
+import { STATUS } from '../../utils/Formatters';
+import { formatFCFA } from '../../utils/Formatters';
 
-const DevisView = ({ quotes, onQuoteUpdate, onAddAgreement, createAgreement }) => {
+const DevisView = ({ quotes, onQuoteUpdate, onAddAgreement, createAgreement,onRefresh }) => {
   const [selectedQuote, setSelectedQuote] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -34,14 +37,19 @@ const DevisView = ({ quotes, onQuoteUpdate, onAddAgreement, createAgreement }) =
     setIsPreviewOpen(false);
   };
 
-  const handleRejectClick = (quote) => {
+  const handleRejectClick = async (quote) => {
     if (window.confirm(`Êtes-vous sûr de vouloir rejeter le devis ${quote.id} ?`)) {
-      const newAgreement = createAgreement(quote, 'Refuser');
-      
-      onQuoteUpdate(quote.id, { status: 'rejected' });
-      onAddAgreement(newAgreement);
-      
-      alert(`Devis ${quote.id} refusé. Un accord de refus a été créé.`);
+      try {
+        const newAgreement = await createAgreement(quote, 'Refuser');
+        
+        await onQuoteUpdate(quote.id, { status: 'rejected' });
+        onAddAgreement(newAgreement);
+        
+        alert(`Devis ${quote.id} refusé. Un accord de refus a été créé.`);
+      } catch (error) {
+        alert('Erreur lors du rejet du devis. Veuillez réessayer.');
+        await onRefresh();
+      }
     }
   };
 
@@ -57,20 +65,25 @@ const DevisView = ({ quotes, onQuoteUpdate, onAddAgreement, createAgreement }) =
     }, 300);
   };
 
-  const handleValidate = (quote, selectedRepairs, totalAmount) => {
-    const newAgreement = createAgreement(quote, 'Accepter', selectedRepairs, totalAmount);
-    
-    onQuoteUpdate(quote.id, { 
-      status: 'approved',
-      amount: totalAmount,
-      repairs: selectedRepairs
-    });
-    onAddAgreement(newAgreement);
-    
-    setIsPreviewOpen(false);
-    setIsModalOpen(false);
-    
-    alert(`Devis ${quote.id} approuvé. Un accord d'acceptation a été créé.`);
+  const handleValidate = async (quote, selectedRepairs, totalAmount) => {
+    try {
+      const newAgreement = await createAgreement(quote, 'Accepter', selectedRepairs, totalAmount);
+      
+      await onQuoteUpdate(quote.id, { 
+        status: 'approved',
+        amount: totalAmount,
+        repairs: selectedRepairs
+      });
+      onAddAgreement(newAgreement);
+      
+      setIsPreviewOpen(false);
+      setIsModalOpen(false);
+      
+      alert(`Devis ${quote.id} approuvé. Un accord d'acceptation a été créé.`);
+    } catch (error) {
+      alert('Erreur lors de la validation du devis. Veuillez réessayer.');
+      await onRefresh();
+    }
   };
 
   const handleRejectFromPreview = (quote) => {

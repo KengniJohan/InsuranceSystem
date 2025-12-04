@@ -1,5 +1,7 @@
 package com.iuc.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,6 +20,7 @@ public class Personne {
     private String adresse;
 
     @OneToOne(mappedBy = "personne")
+	@JsonIgnore
     private Client client;
 
 	public Long getIDpersonne() {

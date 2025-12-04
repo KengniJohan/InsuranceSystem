@@ -98,7 +98,7 @@ const PreviewModal = ({ quote, selectedRepairs, isOpen, onBack, onValidate, onRe
                 <div className="flex justify-between items-center">
                   <span className="text-gray-700">Montant total du devis</span>
                   <span className="text-xl font-semibold text-gray-900">
-                    {formatFCFA(totalAmount)}
+                    {formatFCFA(quote.amount)}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
