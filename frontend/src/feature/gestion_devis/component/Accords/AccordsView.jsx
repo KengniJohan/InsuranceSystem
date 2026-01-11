@@ -4,12 +4,17 @@ import AgreementsFilterTabs from './AgreementFilterTabs';
 import AgreementsHeader from './AgreeementHeader';
 import AgreementCard from './AgreementCard';
 import AgreementDetailsModal from './AgreementDetailModal';
+import { FileText } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
+import { useStorageApp } from '../../../../core/resource/store/storageApp';
 
 const AccordsView = ({ agreements }) => {
   const [selectedAgreement, setSelectedAgreement] = useState(null);
   const [isAgreementModalOpen, setIsAgreementModalOpen] = useState(false);
   const [agreementFilter, setAgreementFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+    const {onMenuClick, activeView, onViewChange} = useStorageApp();
+    const location = useLocation();
 
   const agreementStats = useMemo(() => {
     const accepted = agreements.filter(a => a.statut === 'Accepter').length;
@@ -56,19 +61,37 @@ const AccordsView = ({ agreements }) => {
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Gestion des Accords</h1>
         <p className="text-gray-600">Suivi des accords de prise en charge générés</p>
+                    <div className='flex items-center justify-center ml-259 mt-[-45px]'>
+                        <div className="flex bg-gray-100 rounded-lg p-1 mt-[]">
+              <button
+                onClick={() => onViewChange('devis')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                  activeView === 'devis' 
+                    ? 'bg-white text-blue-600 shadow-sm' 
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Devis
+              </button>
+              <button
+                onClick={() => onViewChange('accords')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                  activeView === 'accords' 
+                    ? 'bg-white text-blue-600 shadow-sm' 
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Accords
+              </button>
+            </div>
+        </div>
       </div>
 
       <AgreementsStatsCards agreements={agreements} activeFilter={agreementFilter} onFilterChange={setAgreementFilter} />
 
       <AgreementsFilterTabs activeFilter={agreementFilter} onFilterChange={setAgreementFilter} stats={agreementStats} />
 
-      <AgreementsHeader
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-        filterStatus={agreementFilter}
-        onFilterChange={setAgreementFilter}
-        onExport={handleExportAgreements}
-      />
+  
 
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {filteredAgreements.map((agreement, index) => (

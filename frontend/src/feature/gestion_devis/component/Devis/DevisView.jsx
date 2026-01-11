@@ -7,6 +7,8 @@ import PreviewModal from './PreviewModal';
 import QuoteDetailsModal from './QuoteDetailsModal';
 import { FileText } from 'lucide-react';
 import { STATUS, formatFCFA } from '../../../../core/resource/utils/Formatters';
+import { useStorageApp } from '../../../../core/resource/store/storageApp';
+import { useLocation } from 'react-router-dom';
 
 const DevisView = ({ quotes, onQuoteUpdate, onAddAgreement, createAgreement,onRefresh }) => {
   const [selectedQuote, setSelectedQuote] = useState(null);
@@ -15,6 +17,8 @@ const DevisView = ({ quotes, onQuoteUpdate, onAddAgreement, createAgreement,onRe
   const [isQuoteDetailsModalOpen, setIsQuoteDetailsModalOpen] = useState(false);
   const [previewRepairs, setPreviewRepairs] = useState([]);
   const [activeFilter, setActiveFilter] = useState('all');
+  const {onMenuClick, activeView, onViewChange} = useStorageApp();
+  const location = useLocation();
 
   const stats = useMemo(() => {
     const pending = quotes.filter(q => q.status === 'pending').length;
@@ -109,6 +113,30 @@ const DevisView = ({ quotes, onQuoteUpdate, onAddAgreement, createAgreement,onRe
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Gestion des Devis Garage</h1>
         <p className="text-gray-600">Consultez et validez les devis de réparation</p>
+            <div className='flex items-center justify-center ml-259 mt-[-45px]'>
+                        <div className="flex bg-gray-100 rounded-lg p-1 mt-[]">
+              <button
+                onClick={() => onViewChange('devis')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                  activeView === 'devis' 
+                    ? 'bg-white text-blue-600 shadow-sm' 
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Devis
+              </button>
+              <button
+                onClick={() => onViewChange('accords')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                  activeView === 'accords' 
+                    ? 'bg-white text-blue-600 shadow-sm' 
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Accords
+              </button>
+            </div>
+        </div>
       </div>
 
       <StatsCards quotes={quotes} activeFilter={activeFilter} onFilterChange={setActiveFilter} />

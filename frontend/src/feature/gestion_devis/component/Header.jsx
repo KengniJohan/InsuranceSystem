@@ -32,46 +32,13 @@ const Header = () => {
               </svg>
             </div>
             <h1 className="text-xl font-bold text-gray-900">SecureAuto</h1>
+
+              <ul className='flex justify-between ml-4'>
+                <li className='mr-4'>Accueil</li>
+                <li>Parametre</li>
+              </ul>
           </div>
           
-          <div className="flex items-center gap-4">
-
-            
-            {/* {  
-            location.pathname == '/sinistre/ajout_sinistre_resultat' && location.pathname == 'sinistre/ajouter_sinistre' && */}
-              
-              <div className="flex bg-gray-100 rounded-lg p-1">
-              <button
-                onClick={() => onViewChange('devis')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                  activeView === 'devis' 
-                    ? 'bg-white text-blue-600 shadow-sm' 
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                Devis
-              </button>
-              <button
-                onClick={() => onViewChange('accords')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                  activeView === 'accords' 
-                    ? 'bg-white text-blue-600 shadow-sm' 
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                Accords
-              </button>
-            </div>
-            {/* //} */}
-
-            <button
-              onClick={onMenuClick}
-              className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              aria-label="Menu"
-            >
-              <Menu className="w-6 h-6 text-gray-700" />
-            </button>
-          </div>
         </div>
       </div>
     </header>

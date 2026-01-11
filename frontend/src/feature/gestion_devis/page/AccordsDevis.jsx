@@ -41,10 +41,10 @@ export const formatFCFA = (amount) => {
 };
 
 // Composant Principal
-const AccordsDevis = () => {
+const AccordsDevis = ({activeView = useStorageApp(state => state.activeView)}) => {
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const activeView = useStorageApp(state => state.activeView);
+  //activeView = useStorageApp(state => state.activeView);
  
   const [quotes, setQuotes] = useState([]);
   const [agreements, setAgreements] = useState([]);
@@ -70,9 +70,6 @@ const AccordsDevis = () => {
       setAgreements(accordsData);
     } catch (error) {
       console.error('Erreur lors du chargement des données:', error);
-      // Fallback sur les données mockées en cas d'erreur
-      //setQuotes(quotesData);
-      //setAgreements(initialAgreementsData);
     } finally {
       setLoading(false);
     }
