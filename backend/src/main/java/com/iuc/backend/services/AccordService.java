@@ -3,11 +3,10 @@ package com.iuc.backend.services;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.iuc.backend.models.*;
+import com.iuc.backend.repositories.*;
+
 import org.springframework.stereotype.Service;
 import java.util.Optional;
-
-
-import com.iuc.backend.services.repositories.*;
 
 @Service
 public class AccordService {

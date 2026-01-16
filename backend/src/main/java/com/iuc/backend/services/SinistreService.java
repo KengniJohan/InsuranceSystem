@@ -2,7 +2,7 @@ package com.iuc.backend.services;
 
 import com.iuc.backend.models.*;
 import com.iuc.backend.models.dto.*;
-import com.iuc.backend.services.repositories.*;
+import com.iuc.backend.repositories.*;
 
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -19,6 +19,14 @@ public class SinistreService {
 
 	public List<SinistreDTO> listAll() {
 		return repo.findAll().stream().map(this::toDTO).collect(Collectors.toList());
+	}
+
+	public Sinistre addSinistre(Sinistre si){
+		return this.repo.save(si);
+	}
+
+	public Sinistre updateSinistre(Sinistre si){
+		return this.repo.save(si);
 	}
 
 	private SinistreDTO toDTO(Sinistre s) {

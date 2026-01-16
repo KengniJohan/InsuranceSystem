@@ -3,7 +3,7 @@ package com.iuc.backend.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.iuc.backend.models.*;
-import com.iuc.backend.services.repositories.DevisRepository;   
+import com.iuc.backend.repositories.DevisRepository;
 
 import java.util.List;
 import java.util.Optional;

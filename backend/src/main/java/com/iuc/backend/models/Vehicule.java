@@ -20,7 +20,7 @@ public class Vehicule {
     private String immatriculation;
     private String modele;
     private String numChassis;
-    private LocalDate anneeVehicule;
+    private String anneeVehicule;
     
 	public Long getIDVehicule() {
 		return IDVehicule;
@@ -58,10 +58,10 @@ public class Vehicule {
 	public void setNumChassis(String numChassis) {
 		this.numChassis = numChassis;
 	}
-	public LocalDate getAnneeVehicule() {
+	public String getAnneeVehicule() {
 		return anneeVehicule;
 	}
-	public void setAnneeVehicule(LocalDate anneeVehicule) {
+	public void setAnneeVehicule(String anneeVehicule) {
 		this.anneeVehicule = anneeVehicule;
 	}
     

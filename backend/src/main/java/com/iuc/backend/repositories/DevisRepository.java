@@ -1,4 +1,4 @@
-package com.iuc.backend.services.repositories;
+package com.iuc.backend.repositories;
 
 import com.iuc.backend.models.Devis;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -16,7 +16,7 @@ const LoaderAdd = () => {
             </div>
             <div className='bg-white p-8 pt-12'>
                 <div>
-                    <h1 className='text-center'>Une erreur est survenue lors de l'enregistrement</h1>
+                    <h1 className='text-center'>Déclaration en cours...</h1>
                     <div className='flex justify-center'>
                         <Lottie animationData={loading}/>
                         {/* <img src={success} className='w-40 h-40'/> */}

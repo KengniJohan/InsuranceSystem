@@ -193,7 +193,11 @@ const AjouterSinistre: React.FunctionComponent = () => {
                 </div>
                 <div className='flex gap-2.5'>
                     <ButtonSinistreAdd title='Retour' type='outline' onPress={()=>{console.log("fsdfsdfd")}} />    
-                    <ButtonSinistreAdd title='Envoyer' onPress={fetchSinistre}/>
+                    <ButtonSinistreAdd title='Envoyer' onPress={function(){ 
+
+                        fetchSinistre();
+                        setAllDegat([]);
+                    }}/>
             
                 </div>
                 {/* <ButtonSinistreAdd/> */}
