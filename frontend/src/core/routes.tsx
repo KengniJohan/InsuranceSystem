@@ -1,10 +1,12 @@
 import Layout from "../Layout"
-import AccordsDevis from "../feature/gestion_devis/page/AccordsDevis"
+import AccordsDevis from "../feature/gestion-devis/page/AccordsDevis"
 import { createBrowserRouter } from "react-router-dom";
-import AjouterSinistre from "../feature/gestion_sinistre/ajouter_sinistre/pages/ajouter_sinistre";
-import AjoutSinistreResultat from "../feature/gestion_sinistre/ajouter_sinistre/pages/ajout_sinistre_resultat";
-import ListingSinistres from "../feature/gestion_sinistre/listing_sinistre/listing_sinistres";
-import AccordsView from "../feature/gestion_devis/component/Accords/AccordsView";
+import AjouterSinistre from "../feature/gestion-sinistre/ajouter-sinistre/pages/AjouterSinistre";
+import AjoutSinistreResultat from "../feature/gestion-sinistre/ajouter-sinistre/pages/AjoutSinistreResultat";
+import ListingSinistres from "../feature/gestion-sinistre/listing-sinistre/ListingSinistres";
+import SinistreDetailPage from "../feature/gestion-sinistre/detail-sinistre/SinistreDetailPage";
+import SinistreEditPage from "../feature/gestion-sinistre/detail-sinistre/SinistreEditPage";
+import HomePage from "../feature/home/HomePage";
 
 export const routes = [
     {
@@ -12,16 +14,32 @@ export const routes = [
         element: <Layout/>,
         children: [
             {
-                path: 'sinistre/ajouter_sinistre',
+                index: true,
+                element: <HomePage/>
+            },
+            {
+                path: 'sinistre/ajouter-sinistre',
                 element: <AjouterSinistre/>
             },
             {
-                path: "sinistre/ajout_sinistre_resultat",
+                path: "sinistre/ajout-sinistre-resultat",
                 element: <AjoutSinistreResultat/>
             },
             {
                 path: "sinistre",
                 element: <ListingSinistres/>
+            },
+            {
+                path: "sinistres",
+                element: <ListingSinistres/>
+            },
+            {
+                path: "sinistre/:id",
+                element: <SinistreDetailPage/>
+            },
+            {
+                path: "sinistre/:id/modifier",
+                element: <SinistreEditPage/>
             },
             {
                 path: "devis",

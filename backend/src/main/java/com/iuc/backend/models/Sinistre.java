@@ -32,7 +32,7 @@ public class Sinistre {
     @JoinColumn(name = "IDVehicule")
     private Vehicule vehicule;
 
-    @OneToMany(mappedBy = "sinistre")
+    @OneToMany(mappedBy = "sinistre", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Degat> degats;
 
 	public Long getIDsinistre() {

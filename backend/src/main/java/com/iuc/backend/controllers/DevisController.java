@@ -3,6 +3,7 @@ package com.iuc.backend.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.iuc.backend.models.*;
+import com.iuc.backend.models.dto.DevisDTO;
 import com.iuc.backend.services.DevisService;
 
 import java.util.List;
@@ -22,10 +23,10 @@ public class DevisController {
         return devisService.saveDevis(devis);
     }
 
-    // Récupérer tous les devis
+    // Récupérer tous les devis (avec DTOs)
     @GetMapping
-    public List<Devis> getAllDevis() {
-        return devisService.getAllDevis();
+    public List<DevisDTO> getAllDevis() {
+        return devisService.getAllDevisDTO();
     }
 
     // Récupérer un devis par ID
@@ -39,13 +40,14 @@ public class DevisController {
     public void deleteDevis(@PathVariable String id) {
         devisService.deleteDevis(id);
     }
+
     @PutMapping("/{id}")
     public Devis updateDevis(@PathVariable String id, @RequestBody Devis devis) {
         System.out.println("==== PUT /devis ====");
-    System.out.println("ID = " + id);
-    System.out.println("Body = " + devis);
-    System.out.println("Sinistre = " + (devis.getSinistre() != null ? devis.getSinistre().getIDsinistre() : "null"));
-    devis.setId(id);
-    return devisService.saveDevis(devis);
-}
+        System.out.println("ID = " + id);
+        System.out.println("Body = " + devis);
+        System.out.println("Sinistre = " + (devis.getSinistre() != null ? devis.getSinistre().getIDsinistre() : "null"));
+        devis.setId(id);
+        return devisService.saveDevis(devis);
+    }
 }

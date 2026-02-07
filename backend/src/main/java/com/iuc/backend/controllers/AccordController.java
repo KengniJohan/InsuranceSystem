@@ -3,6 +3,7 @@ package com.iuc.backend.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.iuc.backend.models.*;
+import com.iuc.backend.models.dto.AccordDTO;
 import com.iuc.backend.services.AccordService;
 
 import java.util.List;
@@ -22,10 +23,10 @@ public class AccordController {
         return accordService.saveAccord(accord);
     }
 
-    // Récupérer tous les accords
+    // Récupérer tous les accords (avec DTOs)
     @GetMapping
-    public List<Accord> getAllAccords() {
-        return accordService.getAllAccords();
+    public List<AccordDTO> getAllAccords() {
+        return accordService.getAllAccordsDTO();
     }
 
     // Récupérer un accord par ID
@@ -39,11 +40,11 @@ public class AccordController {
     public void deleteAccord(@PathVariable String id) {
         accordService.deleteAccord(id);
     }
-    @PutMapping("/{id}")
-public Accord updateAccord(@PathVariable String id, @RequestBody Accord accord) {
-    accord.setId(id);
-    return accordService.saveAccord(accord);
-}
 
+    @PutMapping("/{id}")
+    public Accord updateAccord(@PathVariable String id, @RequestBody Accord accord) {
+        accord.setId(id);
+        return accordService.saveAccord(accord);
+    }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Header from './feature/gestion_devis/component/Header';
+import Header from './feature/gestion-devis/component/Header';
 
 const Layout: React.FunctionComponent = () => {
 
